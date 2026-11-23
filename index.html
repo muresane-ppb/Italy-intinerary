@@ -417,22 +417,51 @@
     html { scroll-behavior: auto; }
     * { transition: none !important; }
   }
+
+  .wx { margin: 4px 0 0; font-size: .82rem; color: var(--muted); font-weight: 600; }
+  .where { color: var(--ink-2); font-size: .92rem; margin-top: 4px; }
+  .group { margin-bottom: 16px; }
+  .group .kind { margin: 0 0 8px; }
+  .note-box { background: var(--warn-soft); color: var(--warn); border-radius: 14px; padding: 14px 16px; font-size: .92rem; margin: 16px 0; }
+  .btn.icon { padding: 0; width: 44px; justify-content: center; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .daybar { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 6px; margin: 0 0 18px; scrollbar-width: none; }
+  .daybar::-webkit-scrollbar { display: none; }
+  .daybar button { flex: 0 0 auto; min-height: 40px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font: 600 .88rem -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; cursor: pointer; }
+  .daybar button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .dayblock[hidden] { display: none; }
+  .tag.urgent { background: var(--accent); color: #fff; }
+  .dayblock { margin-bottom: 8px; }
+  .day-florence { }
+  details.more { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 0 16px; margin-top: 12px; }
+  details.more summary { cursor: pointer; font-weight: 600; min-height: 46px; display: flex; align-items: center; color: var(--accent); list-style: none; }
+  details.more summary::-webkit-details-marker { display: none; }
+  details.more summary::after { content: "+"; margin-left: auto; font-size: 1.2rem; line-height: 1; }
+  details.more[open] summary::after { content: "–"; }
+  details.more[open] summary { margin-bottom: 4px; }
+  ul.legs { margin: 0 0 12px; padding-left: 18px; color: var(--ink-2); font-size: .92rem; }
+  ul.legs li { margin-bottom: 6px; }
+  .callout {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 14px;
+    padding: 14px 16px 6px;
+    margin: 0 0 16px;
+  }
+  .callout-title { font-weight: 700; color: var(--accent); font-size: .95rem; margin-bottom: 8px; }
+  .callout ul.legs { margin: 0 0 8px; color: var(--ink); }
 </style>
 </head>
 <body>
 
 <header class="hero">
   <svg class="skyline" viewBox="0 0 800 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-    <g fill-opacity=".14">
-      <rect x="150" y="60" width="34" height="140"/>
-      <rect x="146" y="50" width="42" height="12"/>
-      <rect x="290" y="120" width="220" height="80"/>
-      <path d="M300 120 Q300 55 400 35 Q500 55 500 120 Z"/>
-      <rect x="392" y="22" width="16" height="16"/>
-      <polygon points="400,0 406,22 394,22"/>
-      <rect x="560" y="80" width="40" height="120"/>
-      <rect x="556" y="72" width="48" height="10"/>
-      <rect x="566" y="58" width="28" height="16"/>
+    <g fill="#ffffff" fill-opacity=".14">
+      <rect x="150" y="60" width="34" height="140"/><rect x="146" y="50" width="42" height="12"/>
+      <rect x="290" y="120" width="220" height="80"/><path d="M300 120 Q300 55 400 35 Q500 55 500 120 Z"/>
+      <rect x="392" y="22" width="16" height="16"/><polygon points="400,0 406,22 394,22"/>
+      <rect x="560" y="80" width="40" height="120"/><rect x="556" y="72" width="48" height="10"/><rect x="566" y="58" width="28" height="16"/>
       <rect x="0" y="182" width="800" height="18"/>
     </g>
   </svg>
@@ -444,7 +473,7 @@
       <text x="70" y="208" font-size="104" transform="rotate(5 230 170)">Florența</text>
     </svg>
   </h1>
-  <p>Cluj → Bologna → Florența → Cluj. Bologna: 4 adulți + 1 copil · Florența: 6 adulți + 2 copii.</p>
+  <p>Cluj → Bologna → Florența → Cluj · Bologna 4 adulți + 1 copil · Florența 6 adulți + 2 copii</p>
   <div class="stats">
     <div class="stat"><b>27 nov</b><span>Zbor 12:00</span></div>
     <div class="stat"><b>Bologna</b><span>până la 30 nov</span></div>
@@ -453,514 +482,78 @@
 </header>
 
 <nav class="pills" aria-label="Secțiuni">
-  <a href="#plecare" data-nav="plecare">Înainte</a>
-  <a href="#vreme" data-nav="vreme">Vreme</a>
-  <a href="#program" data-nav="program">Program</a>
-  <a href="#bologna" data-nav="bologna">Bologna</a>
-  <a href="#florenta" data-nav="florenta">Florența</a>
-  <a href="#transport" data-nav="transport">Transport</a>
-  <a href="#rezervari" data-nav="rezervari">Rezervări</a>
+  <a href="#plan" data-nav="plan">Plan</a>
+  <a href="#plecare" data-nav="plecare">Pregătire</a>
   <a href="#bilete" data-nav="bilete">Bilete</a>
-  <a href="#checklist" data-nav="checklist">Checklist</a>
-  <a href="#sfaturi" data-nav="sfaturi">Sfaturi</a>
 </nav>
 
 <main>
-
   <div class="notice">Programele și prețurile se pot schimba. Confirmă restaurantele, shuttle-ul și orele de ultimă intrare înainte de plecare.</div>
 
-  <!-- ============ ÎNAINTE DE PLECARE ============ -->
+  <section class="block" id="plan">
+    <div class="section-title"><h2>Plan</h2><small>alege o zi</small></div>
+    <div class="daybar" role="group" aria-label="Filtrează pe zi">
+      <button type="button" data-filter="all" aria-pressed="true">Toate</button>
+      <button type="button" data-filter="27" aria-pressed="false">27 nov</button>
+      <button type="button" data-filter="28" aria-pressed="false">28 nov</button>
+      <button type="button" data-filter="29" aria-pressed="false">29 nov</button>
+      <button type="button" data-filter="30" aria-pressed="false">30 nov</button>
+      <button type="button" data-filter="1" aria-pressed="false">1 dec</button>
+      <button type="button" data-filter="2" aria-pressed="false">2 dec</button>
+    </div>
+    <div class="dayblock" data-day="27"><div class="day-head"><div class="date-badge"><b>27</b><span>Joi</span></div><div><h3>Sosire în Bologna</h3><p class="wx">5°C / 8°C · parțial noros, ploaie puțin probabilă</p></div></div><div class="callout"><div class="callout-title">Program și de văzut</div><ul class="legs"><li><b>De văzut în apropiere:</b> porticurile din centru, Piazza Maggiore și Fântâna lui Neptun.</li></ul></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">12:55</div><h4>Aterizare la Bologna</h4><p class="note">Taxi până la cazare, 15–20 min, ~20–25 € în total.</p><p class="note">Aeroport → cazare: taxi 15–20 min (~20–25 €), sau Marconi Express 7 min până la Bologna Centrale (~12,80 €/adult), apoi 10–12 min pe jos sau autobuzul 21, 30, 35.</p></div></li><li class="item"><div class="card"><div class="kind">15:00</div><h4>Check-in la Marconi 34</h4><div class="where">Via Guglielmo Marconi 34/2, 40122 Bologna</div><p class="note">Check-in 15:00–23:00. Dacă ajungi mai devreme, lasă bagajele la recepție.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Guglielmo+Marconi+34+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">15:30</div><h4>Plimbare pe sub porticuri</h4><div class="where">Spre Piazza Maggiore, ~12 min pe jos</div></div></li><li class="item"><div class="card"><div class="kind">16:30</div><h4>Piazza Maggiore & Fântâna lui Neptun</h4><div class="where">Piazza Maggiore, gratuit</div><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Piazza+Maggiore+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">19:30</div><h4>Cină la Trattoria Valerio</h4><div class="where">Via Avesella 10 · 19:30–23:00 · rezervare</div><p class="note">Cazare → Trattoria Valerio: 7 min pe jos.</p><div class="actions"><a class="btn icon" href="tel:+390512684" aria-label="Sună" title="Sună"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="sr">Sună</span></a><a class="btn icon" href="https://www.trattoriavalerio.com" target="_blank" rel="noopener" aria-label="Rezervă online" title="Rezervă online"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă online</span></a><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Avesella+10+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li></ul></div><div class="dayblock" data-day="28"><div class="day-head"><div class="date-badge"><b>28</b><span>Sâm</span></div><div><h3>Bologna pe jos</h3><p class="wx">4°C / 9°C · răcoros, cer parțial noros</p></div></div><div class="callout"><div class="callout-title">Program și de văzut</div><ul class="legs"><li><b>Program:</b> San Petronio 10:00–18:00 (pauză de slujbă 11:00–11:40 și 17:00–17:40). Teatro Anatomico 10:00–18:00, ultima intrare 17:30. Capellini 10:00–18:00, bilete până la 17:30.</li></ul></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">10:00</div><h4>Teatro Anatomico</h4><div class="where">Piazza Galvani 1 · 10:00–18:00, ultima intrare 17:30</div><p class="note">Ghid audio ~10 € sau tur ghidat ~12 €. Rezervare online obligatorie.</p><p class="note">San Petronio → Teatro Anatomico: 3 min pe jos.</p><div class="actions"><a class="btn icon" href="https://www.archiginnasio.it" target="_blank" rel="noopener" aria-label="Rezervă online" title="Rezervă online"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă online</span></a><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Piazza+Galvani+1+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">11:45</div><h4>Basilica di San Petronio</h4><div class="where">Piazza Maggiore 1/e · gratuit</div><p class="note">Intrarea după pauza pentru slujbă (11:00–11:40).</p><p class="note">Cazare → San Petronio: 12 min pe jos.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Piazza+Maggiore+1+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">13:00</div><h4>Prânz la Osteria da Fortunata</h4><div class="where">Via Altabella 19c · program continuu 11:30–00:30</div><p class="note">Teatro Anatomico → Fortunata: circa 10 min pe jos.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Altabella+19c+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">15:00</div><h4>Muzeul de Geologie Capellini</h4><div class="where">Via Zamboni 63 · 10:00–18:00, bilete până la 17:30</div><p class="note">Adulți ~5 €. Tinerii până la 19 ani intră gratuit.</p><p class="note">Fortunata → Capellini: ~15 min pe jos sau autobuzul 20.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Zamboni+63+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">20:00</div><h4>Cină la All'Osteria Bottega</h4><div class="where">Via Santa Caterina 51 · 20:00–22:30 · rezervare</div><p class="note">Cazare → Bottega: 22 min pe jos sau autobuzele 20, 32, 33.</p><div class="actions"><a class="btn icon" href="tel:+39051585111" aria-label="Sună" title="Sună"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="sr">Sună</span></a></div></div></li></ul></div><div class="dayblock" data-day="29"><div class="day-head"><div class="date-badge"><b>29</b><span>Dum</span></div><div><h3>Muzee și cină</h3><p class="wx">3°C / 9°C · cer variabil, uscat</p></div></div><div class="callout"><div class="callout-title">Program și de văzut</div><ul class="legs"><li><b>Program:</b> Archeologic 10:00–19:00, bilete până la 18:00. Restaurantele sunt deschise duminica.</li></ul></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">10:00</div><h4>Museo Civico Archeologico</h4><div class="where">Via dell'Archiginnasio 2 · 10:00–19:00, bilete până la 18:00</div><p class="note">Adulți ~6 €. Copiii sub 18 ani intră gratuit.</p><p class="note">Cazare → Museo Civico Archeologico: 14 min pe jos.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+dell'Archiginnasio+2+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">12:30</div><h4>Prânz la Sfoglia Rina</h4><div class="where">Via Castiglione 5b · 4 min pe jos</div><p class="note">Cazare → Sfoglia Rina: 4 min pe jos. Cazare → Osteria dell'Orsa: 13 min pe jos.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Castiglione+5b+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">14:30</div><h4>Timp liber</h4><div class="where">Pauză pentru copil în Piazza Maggiore</div></div></li><li class="item"><div class="card"><div class="kind">19:00</div><h4>Cină la 051 Osteria</h4><div class="where">Via de' Pignattari 1/f · 19:00–23:00 · rezervare</div><p class="note">Cazare → 051 Osteria: 13 min pe jos.</p><div class="actions"><a class="btn icon" href="tel:+390515105515" aria-label="Sună" title="Sună"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="sr">Sună</span></a><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+de'+Pignattari+1f+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li></ul></div><div class="dayblock" data-day="30"><div class="day-head"><div class="date-badge"><b>30</b><span>Lun</span></div><div><h3>Plecare din Bologna</h3><p class="wx">Vreme: vezi Florența de mai jos</p></div></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">09:00</div><h4>Check-out din Marconi 34</h4><div class="where">Dacă ai bagaje, lasă-le la recepție până la tren.</div></div></li><li class="item"><div class="card"><div class="kind">09:30</div><h4>Pe jos spre Bologna Centrale</h4><div class="where">10–12 min</div></div></li><li class="item"><div class="card"><div class="kind">Ora trenului</div><h4>Tren Bologna → Florența</h4><div class="where">Frecciarossa sau Italo, 35–40 min. Confirmă ora biletului.</div><div class="actions"><a class="btn icon" href="https://www.trenitalia.com" target="_blank" rel="noopener" aria-label="Trenitalia" title="Trenitalia"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Trenitalia</span></a><a class="btn icon" href="https://www.italotreno.com" target="_blank" rel="noopener" aria-label="Italo" title="Italo"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Italo</span></a></div></div></li></ul></div><div class="dayblock day-florence" data-day="30"><div class="day-head"><div class="date-badge"><b>30</b><span>Lun</span></div><div><h3>Florența: sosire și apus</h3><p class="wx">2°C / 10°C · dimineața rece, parțial noros</p></div></div><div class="callout"><div class="callout-title">Program și de văzut</div><ul class="legs"><li><b>Cazare → Piazza del Duomo:</b> 6 min pe jos. Intrarea în catedrală este gratuită.</li><li><b>Atenție:</b> luni, muzeele mari sunt închise. Ziua este pentru plimbare în aer liber.</li></ul></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">Ora sosirii</div><h4>Firenze Santa Maria Novella</h4><div class="where">Taxi 8–10 min (~10–15 €) sau 15–17 min pe jos</div><p class="note">Gară SMN → cazare: taxi 8–10 min (~10–15 €), sau 15–17 min pe jos (~1,2 km).</p></div></li><li class="item"><div class="card"><div class="kind">15:00</div><h4>Check-in la Signoria Palace Luxury</h4><div class="where">Via del Fiordaliso 9, 50123 Firenze · cu lift · 8 persoane</div><p class="note">Check-out până la 10:00.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+del+Fiordaliso+9+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">15:30</div><h4>Piazza della Signoria & Ponte Vecchio</h4><div class="where">2–4 min pe jos de la cazare · gratuit</div><p class="note">Cazare → Piazza della Signoria & Ponte Vecchio: 2–4 min pe jos.</p></div></li><li class="item"><div class="card"><div class="kind">16:15</div><h4>Autobuzul 12 spre Piazzale Michelangelo</h4><div class="where">Din stația Diaz / Ponte alle Grazie</div><p class="note">Bilet 1,70 € cu cardul contactless. Frig după ora 16:30.</p><p class="note">~15 min până la Piazzale Michelangelo.</p></div></li><li class="item"><div class="card"><div class="kind">18:00</div><h4>Coborâre pe jos spre Ponte Vecchio</h4><div class="where">~20 min</div></div></li><li class="item"><div class="card"><div class="kind">19:30</div><h4>Cină</h4><div class="where">Restaurantul de confirmat. Garga este închis luni.</div></div></li></ul></div><div class="dayblock" data-day="1"><div class="day-head"><div class="date-badge"><b>1</b><span>Mar</span></div><div><h3>Muzee și Renaștere</h3><p class="wx">0°C / 8°C · dimineața foarte rece, apoi însorit</p></div></div><div class="callout"><div class="callout-title">Program și de văzut</div><ul class="legs"><li><b>De văzut în zonă:</b> Vivoli (gelato), Ponte Vecchio și Arno.</li></ul></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">08:15</div><h4>Galleria dell'Accademia · David</h4><div class="where">Via Ricasoli 58/60 · 08:15–18:50, ultima intrare 18:20</div><p class="note">Adulți ~20 € + 4 € rezervare online. Copiii sub 18 ani intră gratuit.</p><p class="note">Cazare → Accademia: 13–15 min pe jos.</p><div class="actions"><a class="btn icon" href="https://www.galleriaaccademiafirenze.it" target="_blank" rel="noopener" aria-label="Rezervă online" title="Rezervă online"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă online</span></a><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Ricasoli+58+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">10:30</div><h4>Pauză la Vivoli</h4><div class="where">Via dell'Isola delle Stinche 7/r · affogato</div><p class="note">Verifică programul înainte.</p><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+dell'Isola+delle+Stinche+7+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">12:30</div><h4>Prânz în zona Uffizi</h4><div class="where">De ales pe loc</div></div></li><li class="item"><div class="card"><div class="kind">14:30</div><h4>Galeriile Uffizi</h4><div class="where">Piazzale degli Uffizi 6 · 08:15–18:30, ultima intrare 17:30</div><p class="note">Adulți ~25–29 €. Copiii sub 18 ani intră gratuit. Vino cu 15 min înainte.</p><p class="note">Accademia → Uffizi: ~15 min. Cazare → Uffizi: 4 min.</p><div class="actions"><a class="btn icon" href="https://www.uffizi.it" target="_blank" rel="noopener" aria-label="Rezervă online" title="Rezervă online"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă online</span></a><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Piazzale+degli+Uffizi+6+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li><li class="item"><div class="card"><div class="kind">17:30</div><h4>Ponte Vecchio și plimbare pe Arno</h4><div class="where">Gratuit</div></div></li><li class="item"><div class="card"><div class="kind">19:30</div><h4>Cină la Trattoria Garga</h4><div class="where">Via del Moro 48R · 19:30–24:00</div><div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+del+Moro+48R+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div></div></li></ul></div><div class="dayblock" data-day="2"><div class="day-head"><div class="date-badge"><b>2</b><span>Mie</span></div><div><h3>Plecare spre Cluj</h3><p class="wx">Florența 0°C / 6°C · Bologna 0°C / 3°C · dimineața geroasă, posibilă ceață</p></div></div><div class="callout"><div class="callout-title">Program și de văzut</div><ul class="legs"><li><b>Varianta cu tren:</b> tren din Firenze SMN ~09:30 → Bologna Centrale 10:08 → Marconi Express 7 min → aeroport ~10:25.</li><li><b>Check-out:</b> până la 09:15–09:30 (limita oficială este 10:00).</li></ul></div><ul class="timeline"><li class="item"><div class="card"><div class="kind">08:00</div><h4>Mic dejun și check-out</h4><div class="where">Check-out până la 09:30 (limita oficială este 10:00)</div></div></li><li class="item"><div class="card"><div class="kind">09:30</div><h4>Taxi spre Piazzale Montelungo</h4><div class="where">~10 min, 10–15 €</div><p class="note">Pe jos: 18–20 min.</p></div></li><li class="item"><div class="card"><div class="kind">10:10</div><h4>Appennino Shuttle spre aeroportul Bologna</h4><div class="where">Sosire ~11:30</div><div class="actions"><a class="btn icon" href="https://www.appenninoshuttle.it" target="_blank" rel="noopener" aria-label="Appennino Shuttle" title="Appennino Shuttle"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Appennino Shuttle</span></a></div></div></li><li class="item"><div class="card"><div class="kind">13:30</div><h4>Zbor Bologna → Cluj-Napoca</h4><div class="where">Sosire la 16:20</div></div></li></ul></div>
+  </section>
+
   <section class="block" id="plecare">
-    <div class="section-title"><h2>Înainte de plecare</h2><small>de făcut acasă</small></div>
-    <div class="checklist">
-      <label class="check"><input type="checkbox" data-key="p1"><span>Bilete tren Bologna → Florența (30 nov), pentru 4+1 și, dacă e cazul, pentru cei 3 noi</span></label>
-      <label class="check"><input type="checkbox" data-key="p2"><span>Asigurare de călătorie pentru 9 persoane (medicală și bagaje)</span></label>
-      <label class="check"><input type="checkbox" data-key="p3"><span>Haine de ploaie și o geacă groasă pentru toți</span></label>
-      <label class="check"><input type="checkbox" data-key="p4"><span>Bani mărunți (euro) pentru trattorii mici, gelaterii și taxa de turist</span></label>
-      <label class="check"><input type="checkbox" data-key="p6"><span>Verifică prognoza cu 2–3 zile înainte (25–27 nov)</span></label>
-    </div>
-    <div class="card" style="margin-top:12px">
-      <div class="kind">Taxa de turist, Florența</div>
-      <h4>Se plătește la check-out, pe persoană și pe noapte</h4>
-      <p class="note" style="margin-top:10px">Suma depinde de hotel: în medie ~6 € pe persoană pe noapte, între ~3,50 € și ~8 € în funcție de categorie. Maximum 7 nopți. Copiii sub 12 ani sunt scutiți, deci copilul de 12+ ani intră în calcul. Confirmă suma cu hotelul.</p>
-    </div>
-  </section>
-
-  <!-- ============ VREME ============ -->
-  <section class="block" id="vreme">
-    <div class="section-title"><h2>Vreme</h2><small>prognoză 3bmeteo</small></div>
-
-    <div class="kind" style="margin:4px 0 8px">Bologna</div>
-    <div class="budget">
-      <div class="row"><span>Vin 27 nov<small>Rece, parțial noros spre acoperit. Șanse mici de ploaie după-amiaza și seara. Bun pentru plimbare pe sub porticuri.</small></span><strong>5°C / 8°C</strong></div>
-      <div class="row"><span>Sâm 28 nov<small>Răcoros dimineața, parțial noros, cu scurte apariții ale soarelui. Șanse reduse de precipitații.</small></span><strong>4°C / 9°C</strong></div>
-      <div class="row"><span>Dum 29 nov<small>Dimineață rece, apoi nori și soare. Vreme uscată, ideală pentru mers pe jos în centru.</small></span><strong>3°C / 9°C</strong></div>
-    </div>
-
-    <div class="kind" style="margin:18px 0 8px">Florența și întoarcere</div>
-    <div class="budget">
-      <div class="row"><span>Lun 30 nov<small>Răcoare accentuată dimineața. După ora 16:30, pe Piazzale Michelangelo va fi frig. Parțial noros, șanse reduse de ploaie.</small></span><strong>2°C / 10°C</strong></div>
-      <div class="row"><span>Mar 1 dec<small>Dimineață foarte rece (aprox. 0°C), apoi însorit spre parțial noros. Programul e la interior, la Accademia și Uffizi.</small></span><strong>0°C / 8°C</strong></div>
-      <div class="row"><span>Mie 2 dec<small>Dimineață geroasă. Posibilă ceață sau fulguieli trecătoare în zona Bolognei. Shuttle-ul de 10:10 și trenul de mare viteză nu sunt afectate de ceață.</small></span><strong>Florența 0°C / 6°C<br>Bologna 0°C / 3°C</strong></div>
-    </div>
-
-    <p class="verify">Prognoza a fost preluată de la 3bmeteo și poate fi schimbată. Verifică din nou cu 2–3 zile înainte de plecare.</p>
-  </section>
-
-  <!-- ============ PROGRAM PE ORE ============ -->
-  <section class="block" id="program">
-    <div class="section-title"><h2>Program pe ore</h2><small>propunere, ajustabilă</small></div>
-    <div class="daybar" role="group" aria-label="Filtrează pe zi"><button type="button" data-filter="all" aria-pressed="true">Toate</button><button type="button" data-filter="27" aria-pressed="false">27 nov</button><button type="button" data-filter="28" aria-pressed="false">28 nov</button><button type="button" data-filter="29" aria-pressed="false">29 nov</button><button type="button" data-filter="30" aria-pressed="false">30 nov</button><button type="button" data-filter="1" aria-pressed="false">1 dec</button><button type="button" data-filter="2" aria-pressed="false">2 dec</button></div>
-    <div class="dayblock" data-day="27"><div class="day-head"><div class="date-badge"><b>27</b><span>Joi</span></div><div><h3>Sosire în Bologna</h3><p>Program propus, ajustabil</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">12:55</div><h4>Aterizare la Bologna</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">15:00</div><h4>Check-in la Marconi 34</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">15:30</div><h4>Plimbare pe sub porticuri</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">16:30</div><h4>Piazza Maggiore & Neptun</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">19:30</div><h4>Cină la Trattoria Valerio</h4></div></li>
-    </ul></div>
-    <div class="dayblock" data-day="28"><div class="day-head"><div class="date-badge"><b>28</b><span>Sâm</span></div><div><h3>Bologna pe jos</h3><p>Muzee și plimbare, cu pauza bisericii în program</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">10:00</div><h4>Teatro Anatomico</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">11:45</div><h4>Basilica di San Petronio</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">13:00</div><h4>Prânz la Osteria da Fortunata</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">15:00</div><h4>Muzeul de Geologie Capellini</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">20:00</div><h4>Cină la All'Osteria Bottega</h4></div></li>
-    </ul></div>
-    <div class="dayblock" data-day="29"><div class="day-head"><div class="date-badge"><b>29</b><span>Dum</span></div><div><h3>Muzee și cină</h3><p>Restaurantele sunt deschise duminica</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">10:00</div><h4>Museo Civico Archeologico</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">12:30</div><h4>Prânz la Sfoglia Rina</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">14:30</div><h4>Timp liber în centru</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">19:00</div><h4>Cină la 051 Osteria</h4></div></li>
-    </ul></div>
-    <div class="dayblock" data-day="30"><div class="day-head"><div class="date-badge"><b>30</b><span>Lun</span></div><div><h3>Bologna, plecare</h3><p>Check-out și tren spre Florența</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">09:00</div><h4>Check-out din Marconi 34</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">09:30</div><h4>Plecare pe jos spre Bologna Centrale</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">Ora trenului</div><h4>Tren spre Florența</h4><p class="note">Frecciarossa sau Italo, 35–40 min. Confirmă ora biletului.</p></div></li>
-    </ul></div>
-    <div class="dayblock" data-day="30"><div class="day-head"><div class="date-badge"><b>30</b><span>Lun</span></div><div><h3>Florența, sosire și apus</h3><p>Muzeele mari sunt închise luni</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">Ora sosirii</div><h4>Sosire la Firenze Santa Maria Novella</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">15:00</div><h4>Check-in la Signoria Palace</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">15:30</div><h4>Piazza della Signoria & Ponte Vecchio</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">16:15</div><h4>Autobuzul 12 spre Piazzale Michelangelo</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">Apus</div><h4>Piazzale Michelangelo</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">18:00</div><h4>Coborâre pe jos spre Ponte Vecchio</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">19:30</div><h4>Cină la un restaurant în centru</h4><p class="note">Restaurantul de confirmat. Garga este închis luni.</p></div></li>
-    </ul></div>
-    <div class="dayblock" data-day="1"><div class="day-head"><div class="date-badge"><b>1</b><span>Mar</span></div><div><h3>Muzee & Renaștere</h3><p>Accademia dimineața, Uffizi după-amiaza</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">08:15</div><h4>Galleria dell'Accademia · David</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">10:30</div><h4>Pauză la Vivoli</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">12:30</div><h4>Prânz în zona Uffizi</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">14:30</div><h4>Galeriile Uffizi</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">17:30</div><h4>Ponte Vecchio & plimbare pe Arno</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">19:30</div><h4>Cină la Trattoria Garga</h4></div></li>
-    </ul></div>
-    <div class="dayblock" data-day="2"><div class="day-head"><div class="date-badge"><b>2</b><span>Mie</span></div><div><h3>Plecare spre Cluj</h3><p>Check-out până la 09:30</p></div></div>
-    <ul class="timeline">
-      <li class="item"><div class="card"><div class="kind">08:00</div><h4>Mic dejun și pregătire</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">09:30</div><h4>Taxi spre Piazzale Montelungo</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">10:10</div><h4>Appennino Shuttle spre aeroport</h4></div></li>
-      <li class="item"><div class="card"><div class="kind">13:30</div><h4>Zbor Bologna → Cluj-Napoca</h4></div></li>
-    </ul></div>
-  </section>
-
-  <!-- ============ BOLOGNA ============ -->
-  <section class="block" id="bologna">
-    <div class="section-title"><h2>Bologna</h2><small>27 – 30 nov</small></div>
-
-    <div class="card" style="margin-bottom:14px">
-      <div class="kind">Cazare</div>
-      <div class="card-top"><h4>Marconi 34 · Eleganza e comodità</h4><span class="tag ok">cu lift</span></div>
-      <dl class="facts">
-        <dt>Adresă</dt><dd>Via Guglielmo Marconi 34/2, 40122 Bologna</dd>
-        <dt>Check-in</dt><dd>15:00 – 23:00</dd>
-        <dt>Check-out</dt><dd>24h</dd>
-      </dl>
-      <div class="actions">
-        <a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+Guglielmo+Marconi+34+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a>
+    <div class="section-title"><h2>Pregătire</h2><small id="count"></small></div>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    
+    <div class="group"><div class="kind">Rezervări, în ordinea termenelor</div>
+      <div class="checklist">
+        <label class="check"><input type="checkbox" data-key="r1"><span>Trattoria Valerio · 27 nov</span></label>
+        <label class="check"><input type="checkbox" data-key="r2"><span>All'Osteria Bottega · 27 nov (alternativă)</span></label>
+        <label class="check"><input type="checkbox" data-key="r3"><span>Teatro Anatomico · 28 nov (online)</span></label>
+        <label class="check"><input type="checkbox" data-key="r4"><span>051 Osteria · 29 nov</span></label>
+        <label class="check"><input type="checkbox" data-key="r5"><span><b>Accademia · David</b> · 1 dec, dimineața <span class='tag urgent'>urgent</span></span></label>
+        <label class="check"><input type="checkbox" data-key="r6"><span><b>Uffizi</b> · 1 dec, după-amiaza <span class='tag urgent'>urgent</span></span></label>
+        <label class="check"><input type="checkbox" data-key="r7"><span>Appennino Shuttle · 2 dec, 10:10</span></label>
       </div>
     </div>
-
-    <div class="day-head">
-      <div class="date-badge"><b>27</b><span>Joi</span></div>
-      <div><h3>Sosire & cină</h3><p>Zbor 12:55 la Bologna</p><span class="wx">5°C / 8°C · parțial noros, ploaie puțin probabilă</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item">
-        <div class="card">
-          <div class="kind">Transfer</div>
-          <h4>Aeroport → cazare</h4>
-          <div class="options">
-            <div class="option"><b>Taxi (recomandat)</b><span>15–20 min direct · ~20–25 € în total</span></div>
-            <div class="option"><b>Marconi Express + pe jos</b><span>7 min până la Bologna Centrale (~12,80 €/adult), apoi 10–12 min pe jos sau autobuzul 21, 30, 35</span></div>
-          </div>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Cină</div><h4>Trattoria Valerio</h4></div><span class="tag">rezervare</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via Avesella 10 · 7 min pe jos</dd>
-            <dt>Program</dt><dd>19:30 – 23:00</dd>
-          </dl>
-          <div class="actions">
-            <a class="btn icon" href="tel:+390512684" aria-label="Sună" title="Sună"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="sr">Sună</span></a>
-            <a class="btn ghost icon" href="https://www.trattoriavalerio.com" target="_blank" rel="noopener" aria-label="Rezervă online" title="Rezervă online"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă online</span></a>
-          </div>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Alternativă</div><h4>All'Osteria Bottega</h4></div><span class="tag">rezervare</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via Santa Caterina 51 · 22 min pe jos (autobuzele 20, 32, 33)</dd>
-            <dt>Program</dt><dd>20:00 – 22:30</dd>
-          </dl>
-          <div class="actions"><a class="btn icon" href="tel:+39051585111" aria-label="Sună" title="Sună"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="sr">Sună</span></a></div>
-        </div>
-      </li>
-    </ul>
-
-    <div class="day-head">
-      <div class="date-badge"><b>28</b><span>Vin</span></div>
-      <div><h3>Bologna pe jos</h3><p>Totul la 3–15 min distanță</p><span class="wx">4°C / 9°C · răcoros, cer parțial noros</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item free">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Biserică</div><h4>Basilica di San Petronio</h4></div><span class="tag ok">gratuit</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Piazza Maggiore 1/e · 12 min pe jos</dd>
-            <dt>Program</dt><dd>10:00 – 18:00 · pauze pentru slujbe 11:00–11:40 și 17:00–17:40</dd>
-            <dt>Extra</dt><dd>Capela Bolognini 5 € (opțional)</dd>
-          </dl>
-          <div class="actions"><a class="btn ghost icon" href="https://www.google.com/maps/search/?api=1&query=Piazza+Maggiore+1+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div>
-        </div>
-      </li>
-      <li class="item free">
-        <div class="card">
-          <div class="kind">Piață</div>
-          <h4>Piazza Maggiore & Fântâna lui Neptun</h4>
-          <p class="note" style="margin-top:10px">Chiar lângă bazilică. Bun pentru fotografii.</p>
-        </div>
-      </li>
-      <li class="item">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Muzeu</div><h4>Teatro Anatomico (Archiginnasio)</h4></div><span class="tag">rezervare</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Piazza Galvani 1 · 3 min de la bazilică</dd>
-            <dt>Program</dt><dd>10:00 – 18:00 · ultima intrare 17:30</dd>
-            <dt>Prețuri</dt><dd>Ghid audio ~10 € · tur ghidat ~12 € · copii sub 12 ani gratuit</dd>
-          </dl>
-          <p class="note">Teatrul anatomic din lemn sculptat (1637). Intrarea se face de obicei doar cu rezervare.</p>
-          <div class="actions">
-            <a class="btn icon" href="https://www.archiginnasio.it" target="_blank" rel="noopener" aria-label="Rezervă" title="Rezervă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă</span></a>
-            <a class="btn ghost" href="https://www.bolognawelcome.com" target="_blank" rel="noopener">Bologna Welcome</a>
-          </div>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Prânz</div><h4>Osteria da Fortunata</h4></div></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via Altabella 19c · 7 min pe jos</dd>
-            <dt>Program</dt><dd>11:30 – 00:30 (program continuu)</dd>
-          </dl>
-          <div class="actions"><a class="btn ghost icon" href="https://www.google.com/maps/search/?api=1&query=Osteria+da+Fortunata+Via+Altabella+19c+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div>
-        </div>
-      </li>
-      <li class="item">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Muzeu</div><h4>Muzeul de Geologie „Giovanni Capellini”</h4></div><span class="tag neutral">tineri gratuit</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via Zamboni 63 · 15 min pe jos sau autobuzul 20</dd>
-            <dt>Program</dt><dd>10:00 – 18:00 · bilete până la 17:30</dd>
-            <dt>Prețuri</dt><dd>Adulți ~5 € · tineri până la 19 ani gratuit</dd>
-          </dl>
-          <div class="actions"><a class="btn ghost icon" href="https://www.google.com/maps/search/?api=1&query=Via+Zamboni+63+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card">
-          <div class="kind">Cină</div>
-          <h4>Valerio sau Bottega</h4>
-          <p class="note">Alege varianta pe care nu ai ales-o joi.</p>
-        </div>
-      </li>
-    </ul>
-
-    <div class="day-head">
-      <div class="date-badge"><b>29</b><span>Dum</span></div>
-      <div><h3>Muzee & cină</h3><p>Restaurantele sunt deschise duminica</p><span class="wx">3°C / 9°C · cer variabil, uscat</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Muzeu</div><h4>Museo Civico Archeologico</h4></div><span class="tag neutral">sub 18 gratuit</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via dell'Archiginnasio 2 · 14 min pe jos</dd>
-            <dt>Program</dt><dd>10:00 – 19:00 · bilete până la 18:00</dd>
-            <dt>Prețuri</dt><dd>Adulți ~6 €</dd>
-          </dl>
-          <div class="actions"><a class="btn ghost icon" href="https://www.google.com/maps/search/?api=1&query=Via+dell+Archiginnasio+2+Bologna" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card">
-          <div class="kind">Prânz</div>
-          <h4>Osteria dell'Orsa sau Sfoglia Rina</h4>
-          <dl class="facts">
-            <dt>Orsa</dt><dd>Via Mentana 1f · 13 min pe jos</dd>
-            <dt>Sfoglia Rina</dt><dd>Via Castiglione 5b · 4 min pe jos</dd>
-          </dl>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Cină</div><h4>051 Osteria</h4></div><span class="tag">rezervare</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via de' Pignattari 1/f · 13 min pe jos</dd>
-            <dt>Program</dt><dd>19:00 – 23:00</dd>
-          </dl>
-          <div class="actions">
-            <a class="btn icon" href="tel:+390515105515" aria-label="Sună" title="Sună"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="sr">Sună</span></a>
-            <a class="btn ghost" href="https://051.it" target="_blank" rel="noopener">Site</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-
-    <div class="day-head">
-      <div class="date-badge"><b>30</b><span>Lun</span></div>
-      <div><h3>Plecare spre Florența</h3><p>Check-out dimineața</p><span class="wx">Fără prognoză separată pentru Bologna</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item">
-        <div class="card"><p class="note" style="margin:0">Check-out și 10–12 min pe jos până la Bologna Centrale.</p></div>
-      </li>
-    </ul>
-  </section>
-
-  <!-- ============ FLORENȚA ============ -->
-  <section class="block" id="florenta">
-    <div class="section-title"><h2>Florența</h2><small>30 nov – 2 dec</small></div>
-
-    <div class="card" style="margin-bottom:14px">
-      <div class="kind">Cazare</div>
-      <div class="card-top"><h4>Signoria Palace Luxury</h4><span class="tag ok">lângă Uffizi</span></div>
-      <dl class="facts">
-        <dt>Adresă</dt><dd>Via del Fiordaliso 9, 50123 Firenze · cu lift</dd>
-        <dt>Check-in</dt><dd>de la 15:00</dd>
-        <dt>Check-out</dt><dd>până la 10:00</dd><dt>Grup</dt><dd>8 persoane (6 adulți, 2 copii)</dd>
-      </dl>
-      <div class="actions"><a class="btn icon" href="https://www.google.com/maps/search/?api=1&query=Via+del+Fiordaliso+9+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a></div>
-    </div>
-
-    <div class="day-head">
-      <div class="date-badge"><b>30</b><span>Lun</span></div>
-      <div><h3>Transfer & plimbare</h3><p>Muzeele mari sunt închise luni</p><span class="wx">2°C / 10°C · dimineața rece, parțial noros</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item lodging">
-        <div class="card">
-          <div class="kind">Tren</div>
-          <h4>Bologna → Florența</h4>
-          <dl class="facts">
-            <dt>Durată</dt><dd>35–40 min · Frecciarossa sau Italo</dd>
-            <dt>Gară → cazare</dt><dd>Taxi 8–10 min (~10–15 €) sau 15–17 min pe jos</dd><dt>Bilete</dt><dd>Adaugă locuri pentru cei 3 noi</dd>
-          </dl>
-          <div class="actions">
-            <a class="btn ghost" href="https://www.trenitalia.com" target="_blank" rel="noopener">Trenitalia</a>
-            <a class="btn ghost" href="https://www.italotreno.com" target="_blank" rel="noopener">Italo</a>
-          </div>
-        </div>
-      </li>
-      <li class="item free">
-        <div class="card">
-          <div class="kind">Centru</div>
-          <h4>Piazza della Signoria & Ponte Vecchio</h4>
-          <p class="note" style="margin-top:10px">2–4 min pe jos de la cazare · gratuit</p>
-        </div>
-      </li>
-      <li class="item free">
-        <div class="card">
-          <div class="kind">Catedrală</div>
-          <h4>Piazza del Duomo</h4>
-          <p class="note" style="margin-top:10px">Santa Maria del Fiore, 6 min pe jos · intrarea în catedrală este gratuită</p>
-        </div>
-      </li>
-      <li class="item">
-        <div class="card">
-          <div class="kind">Apus</div>
-          <h4>Piazzale Michelangelo</h4>
-          <dl class="facts">
-            <dt>Cum ajungi</dt><dd>Autobuzul 12 din Diaz / Ponte alle Grazie, ~15 min</dd>
-            <dt>Bilet</dt><dd>1,70 € cu cardul contactless</dd>
-            <dt>Coborâre</dt><dd>~20 min pe jos până la Ponte Vecchio</dd>
-          </dl>
-        </div>
-      </li>
-    </ul>
-
-    <div class="day-head">
-      <div class="date-badge"><b>1</b><span>Mar</span></div>
-      <div><h3>Muzee & Renaștere</h3><p>Accademia dimineața, Uffizi după-amiaza</p><span class="wx">0°C / 8°C · dimineața foarte rece, apoi însorit</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Muzeu</div><h4>Galleria dell'Accademia · David</h4></div><span class="tag">rezervare</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Via Ricasoli 58/60 · 13–15 min pe jos</dd>
-            <dt>Program</dt><dd>08:15 – 18:50 · ultima intrare 18:20</dd>
-            <dt>Prețuri</dt><dd>Adulți ~20 € + 4 € rezervare online · sub 18 ani gratuit</dd>
-          </dl>
-          <p class="note">Cel mai liniștit moment este la prima intrare.</p>
-          <div class="actions">
-            <a class="btn icon" href="https://www.galleriaaccademiafirenze.it" target="_blank" rel="noopener" aria-label="Rezervă" title="Rezervă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă</span></a>
-            <a class="btn ghost icon" href="https://www.google.com/maps/search/?api=1&query=Via+Ricasoli+58+Firenze" target="_blank" rel="noopener" aria-label="Hartă" title="Hartă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="sr">Hartă</span></a>
-          </div>
-        </div>
-      </li>
-      <li class="item">
-        <div class="card">
-          <div class="card-top"><div><div class="kind">Muzeu</div><h4>Galeriile Uffizi</h4></div><span class="tag">rezervare</span></div>
-          <dl class="facts">
-            <dt>Adresă</dt><dd>Piazzale degli Uffizi 6 · 4 min de la cazare</dd>
-            <dt>Program</dt><dd>08:15 – 18:30 · ultima intrare 17:30</dd>
-            <dt>Prețuri</dt><dd>Adulți ~25–29 € · sub 18 ani gratuit</dd>
-          </dl>
-          <p class="note">Alocă 2–3 ore. Vino cu 15 min înainte de intervalul rezervat.</p>
-          <div class="actions"><a class="btn icon" href="https://www.uffizi.it" target="_blank" rel="noopener" aria-label="Rezervă" title="Rezervă"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="sr">Rezervă</span></a></div>
-        </div>
-      </li>
-      <li class="item food">
-        <div class="card"><div class="kind">Seară</div><h4>Cină relaxată</h4><p class="note">Ultima noapte în Florența.</p></div>
-      </li>
-    </ul>
-
-    <div class="day-head">
-      <div class="date-badge"><b>2</b><span>Mie</span></div>
-      <div><h3>Plecare spre Cluj</h3><p>Check-out până la 09:15–09:30</p><span class="wx">0°C / 6°C Florența · 0°C / 3°C Bologna · dimineața geroasă</span></div>
-    </div>
-    <ul class="timeline">
-      <li class="item">
-        <div class="card">
-          <div class="kind">Transfer</div>
-          <h4>Cazare → Piazzale Montelungo</h4>
-          <dl class="facts">
-            <dt>Taxi</dt><dd>10 min, ~10–15 € (lângă peronul 16 SMN)</dd>
-            <dt>Pe jos</dt><dd>18–20 min</dd><dt>Grup</dt><dd>8 persoane: două taxiuri sau un minivan</dd>
-          </dl>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <!-- ============ TRANSPORT ============ -->
-  <section class="block" id="transport">
-    <div class="section-title"><h2>Transport</h2></div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="kind">Florența → Aeroport Bologna</div>
-      <h4>Appennino Shuttle</h4>
-      <p class="note" style="margin-top:10px">Transfer direct, fără schimbări, din Piazzale Montelungo.</p>
-      <div class="options">
-        <div class="option"><b>Recomandat: 10:10 → 11:30</b><span>Ajungi cu 2 ore înainte de zbor</span></div>
-        <div class="option"><b>Mai devreme: 08:10 → 09:30</b><span>Pentru siguranță</span></div>
-        <div class="option"><b>Tren + Marconi Express</b><span>Tren ~09:30 → Bologna Centrale 10:08 → aeroport ~10:25</span></div>
+    <div class="group"><div class="kind">Transport și cazare</div>
+      <div class="checklist">
+        <label class="check"><input type="checkbox" data-key="t1"><span>Zbor Cluj → Bologna · 27 nov, 12:00</span></label>
+        <label class="check"><input type="checkbox" data-key="t2"><span>Tren Bologna → Florența · 30 nov (și pentru cei 3 noi, dacă e cazul)</span></label>
+        <label class="check"><input type="checkbox" data-key="t3"><span>Zbor Bologna → Cluj · 2 dec, 13:30</span></label>
+        <label class="check"><input type="checkbox" data-key="t4"><span>Cazare Marconi 34 · Bologna</span></label>
+        <label class="check"><input type="checkbox" data-key="t5"><span>Cazare Signoria Palace Luxury · Florența (8 persoane)</span></label>
       </div>
-      <p class="note">Rezervă locuri pentru 8 persoane, cu bagaje. Dacă grupul nou pleacă separat, verifică biletele.</p><div class="actions"><a class="btn" href="https://www.appenninoshuttle.it" target="_blank" rel="noopener">appenninoshuttle.it</a></div>
     </div>
-    <div class="card">
-      <div class="kind">Zbor</div>
-      <h4>Bologna → Cluj-Napoca</h4>
-      <dl class="facts"><dt>2 dec</dt><dd>Plecare 13:30 · sosire 16:20</dd></dl>
+    <div class="group"><div class="kind">Pregătire</div>
+      <div class="checklist">
+        <label class="check"><input type="checkbox" data-key="g1"><span>Asigurare de călătorie pentru 9 persoane</span></label>
+        <label class="check"><input type="checkbox" data-key="g2"><span>Haine de ploaie și o geacă groasă pentru toți</span></label>
+        <label class="check"><input type="checkbox" data-key="g3"><span>Bani mărunți pentru trattorii și gelaterii</span></label>
+        <label class="check"><input type="checkbox" data-key="g4"><span>Verifică prognoza pe 25–27 nov</span></label>
+      </div>
     </div>
-  </section>
-
-  <!-- ============ REZERVĂRI ============ -->
-  <section class="block" id="rezervari">
-    <div class="section-title"><h2>Rezervări</h2><small>cele mai urgente</small></div>
-    <div class="book-grid">
-      <a class="book" href="tel:+390512684"><div><strong>Trattoria Valerio</strong><small>27 nov · +39 051 268404</small></div><span class="arrow">↗</span></a>
-      <a class="book" href="tel:+39051585111"><div><strong>All'Osteria Bottega</strong><small>27 nov, alternativă · +39 051 585111</small></div><span class="arrow">↗</span></a>
-      <a class="book" href="https://www.archiginnasio.it" target="_blank" rel="noopener"><div><strong>Teatro Anatomico</strong><small>28 nov, rezervare online</small></div><span class="arrow">→</span></a>
-      <a class="book" href="tel:+390515105515"><div><strong>051 Osteria</strong><small>29 nov · +39 051 510515</small></div><span class="arrow">↗</span></a>
-      <a class="book" href="https://www.galleriaaccademiafirenze.it" target="_blank" rel="noopener"><div><strong>Accademia · David</strong><small>1 dec, dimineața</small></div><div class="tags"><span class="tag urgent">urgent</span><span class="arrow">→</span></div></a>
-      <a class="book" href="https://www.uffizi.it" target="_blank" rel="noopener"><div><strong>Uffizi</strong><small>1 dec, după-amiaza</small></div><div class="tags"><span class="tag urgent">urgent</span><span class="arrow">→</span></div></a>
-      <a class="book" href="https://www.appenninoshuttle.it" target="_blank" rel="noopener"><div><strong>Appennino Shuttle</strong><small>2 dec, 10:10</small></div><span class="arrow">→</span></a>
-    </div>
-  </section>
-
-  <!-- ============ BILETE ============ -->
-  <section class="block" id="bilete">
-    <div class="section-title"><h2>Bilete</h2><small>estimare pentru tot grupul</small></div>
-    <div class="budget">
-      <div class="row"><span>Teatro Anatomico (ghid audio)<small>~10 € × 4</small></span><strong>~40 €</strong></div>
-      <div class="row"><span>Muzeul Capellini<small>~5 € × 4</small></span><strong>~20 €</strong></div>
-      <div class="row"><span>Muzeul Arheologic<small>~6 € × 4</small></span><strong>~24 €</strong></div>
-      <div class="row"><span>Accademia<small>~20 € + 4 € rezervare, × 6 adulți</small></span><strong>~144 €</strong></div>
-      <div class="row"><span>Uffizi<small>~25–29 € × 6 adulți</small></span><strong>~150–174 €</strong></div>
-      <div class="row total"><span>Total aproximativ<small>Bologna 4+1 · Florența 6+2</small></span><strong>~378–402 €</strong></div>
-    </div>
-    <p class="verify">Copiii sub 18 ani intră gratuit la Accademia și Uffizi. Trenul, zborurile, cazarea, shuttle-ul și taxiurile nu sunt incluse.</p>
-  </section>
-
-  <!-- ============ CHECKLIST ============ -->
-  <section class="block" id="checklist">
-    <div class="section-title"><h2>Checklist</h2><small id="count"></small></div>
-    <div class="checklist">
-      <div class="progress" aria-hidden="true"><i id="bar"></i></div>
-      <label class="check"><input type="checkbox" data-key="c1"><span>Zbor Cluj → Bologna (27 nov)</span></label>
-      <label class="check"><input type="checkbox" data-key="c2"><span>Cazare Marconi 34 (Bologna)</span></label>
-      <label class="check"><input type="checkbox" data-key="c3"><span>Rezervare cină Valerio sau Bottega (27 nov)</span></label>
-      <label class="check"><input type="checkbox" data-key="c4"><span>Rezervare Teatro Anatomico (28 nov)</span></label>
-      <label class="check"><input type="checkbox" data-key="c5"><span>Rezervare 051 Osteria (29 nov)</span></label>
-      <label class="check"><input type="checkbox" data-key="c6"><span>Bilet tren Bologna → Florența (30 nov)</span></label>
-      <label class="check"><input type="checkbox" data-key="c7"><span>Cazare Signoria Palace Luxury (8 persoane)</span></label>
-      <label class="check"><input type="checkbox" data-key="c8"><span>Rezervare Accademia (1 dec, dimineața)</span></label>
-      <label class="check"><input type="checkbox" data-key="c9"><span>Rezervare Uffizi (1 dec, după-amiaza)</span></label>
-      <label class="check"><input type="checkbox" data-key="c10"><span>Bilet Appennino Shuttle (2 dec, 10:10)</span></label>
-      <label class="check"><input type="checkbox" data-key="c11"><span>Zbor Bologna → Cluj (2 dec, 13:30)</span></label>
-      <label class="check"><input type="checkbox" data-key="c12"><span>Bilete tren pentru cei 3 noi (dacă e nevoie)</span></label>
-      <label class="check"><input type="checkbox" data-key="c13"><span>Locuri shuttle și taxi pentru 8 persoane</span></label>
-    </div>
-  </section>
-
-  <!-- ============ SFATURI ============ -->
-  <section class="block" id="sfaturi">
-    <div class="section-title"><h2>Sfaturi</h2><small>utile pe drum</small></div>
-    <div class="tips">
-      <div class="tip-item"><b>Priză și curent</b><span>230V, prize tip C și F, ca în România. Nu ai nevoie de adaptor.</span></div>
-      <div class="tip-item"><b>Încălțăminte</b><span>Centrele vechi au străzi cu pietre cubice și multe scări. Alege pantofi comozi.</span></div>
-      <div class="tip-item"><b>Pentru copil</b><span>Museo Leonardo da Vinci din Florența are machete funcționale pe care le poate încerca. Piazza Maggiore din Bologna e bună pentru o pauză de joacă.</span></div>
-      <div class="tip-item"><b>Zi liberă în Florența</b><span>Luni, muzeele mari sunt închise. E zi bună pentru Piazzale Michelangelo la apus și pentru Duomo.</span></div>
-    </div>
-
-    <div class="card" style="margin-top:14px">
-      <div class="kind">Remindere</div>
-      <h4>Ce trebuie făcut, pe zile</h4>
-      <ul class="remind" style="margin-top:8px">
-        <li><b>25 nov</b><span>Verifică prognoza pentru perioada 27 nov – 2 dec.</span></li>
-        <li><b>27 nov</b><span>Check-in la Marconi 34 (15:00–23:00). Cina la Valerio sau Bottega, cu rezervare.</span></li>
-        <li><b>28 nov</b><span>Teatro Anatomico, cu bilet rezervat online.</span></li>
-        <li><b>29 nov</b><span>Cina la 051 Osteria, cu rezervare.</span></li>
-        <li><b>30 nov</b><span>Check-out din Bologna dimineața și tren spre Florența.</span></li>
-        <li><b>1 dec</b><span>Accademia, dimineața, la intervalul rezervat. Uffizi după-amiaza.</span></li>
-        <li><b>2 dec</b><span>Check-out din Florența până la 09:30. Appennino Shuttle la 10:10. Zbor 13:30.</span></li>
-      </ul>
-    </div>
-
-    <div class="card" style="margin-top:14px">
-      <div class="kind">Notițe</div>
-      <h4>Notițele tale</h4>
-      <textarea class="notes" id="notes" placeholder="Scrie aici ce vrei să nu uiți: numere, rezervări, idei..."></textarea>
+    <div class="note-box"><b>Taxa de turist, Florența:</b> se plătește la check-out, pe persoană și pe noapte. În medie ~6 € (între ~3,50 € și ~8 €, după hotel), cu maximum 7 nopți. Copiii sub 12 ani sunt scutiți. Confirmă suma cu hotelul.</div>
+    <div class="card"><div class="kind">Notițe</div>
+      <textarea class="notes" id="notes" placeholder="Scrie aici ce nu vrei să uiți..."></textarea>
       <div class="saved" id="saved-state">Se salvează automat pe acest telefon.</div>
     </div>
+
+  </section>
+
+  <section class="block" id="bilete">
+    <div class="section-title"><h2>Bilete</h2><small>estimare, tot grupul</small></div>
+    
+    <div class="budget">
+      <div class="row"><span>Bologna<small>Teatro ~40 € · Capellini ~20 € · Archeologic ~24 €</small></span><strong>~84 €</strong></div>
+      <div class="row"><span>Florența<small>Accademia ~144 € (6 adulți, cu rezervare) · Uffizi ~150–174 €</small></span><strong>~294–318 €</strong></div>
+      <div class="row total"><span>Total aproximativ</span><strong>~378–402 €</strong></div>
+    </div>
+    <p class="verify">Copiii sub 18 ani intră gratuit la Accademia și Uffizi. Trenul, zborurile, cazarea, shuttle-ul și taxiurile nu sunt incluse.</p>
+
   </section>
 
   <p class="verify">Informațiile au fost verificate pe surse publice, dar pot fi modificate. Verifică programul pe site-urile oficiale înainte de vizită.</p>
@@ -970,22 +563,22 @@
   (function () {
     var store = null;
     try { store = window.localStorage; } catch (e) {}
+
+    // checklists
     var boxes = Array.prototype.slice.call(document.querySelectorAll('.check input[type="checkbox"]'));
     var bar = document.getElementById('bar');
     var count = document.getElementById('count');
-
     function update() {
       var done = boxes.filter(function (b) { return b.checked; }).length;
-      bar.style.width = (boxes.length ? Math.round(done / boxes.length * 100) : 0) + '%';
-      count.textContent = done + ' din ' + boxes.length + ' făcute';
+      if (bar) bar.style.width = (boxes.length ? Math.round(done / boxes.length * 100) : 0) + '%';
+      if (count) count.textContent = done + ' din ' + boxes.length + ' făcute';
     }
-
     boxes.forEach(function (box) {
       var label = box.closest('.check');
       var key = 'itin-' + box.getAttribute('data-key');
       var saved = null;
       try { saved = store ? store.getItem(key) : null; } catch (e) {}
-      if (saved === '1') { box.checked = true; }
+      if (saved === '1') box.checked = true;
       label.classList.toggle('done', box.checked);
       box.addEventListener('change', function () {
         label.classList.toggle('done', box.checked);
@@ -994,6 +587,17 @@
       });
     });
     update();
+
+    // day switcher
+    var dayBtns = Array.prototype.slice.call(document.querySelectorAll('.daybar button'));
+    var dayBlocks = Array.prototype.slice.call(document.querySelectorAll('.dayblock'));
+    dayBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var f = btn.getAttribute('data-filter');
+        dayBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+        dayBlocks.forEach(function (d) { d.hidden = !(f === 'all' || d.getAttribute('data-day') === f); });
+      });
+    });
 
     // notes autosave
     var notes = document.getElementById('notes');
@@ -1011,31 +615,15 @@
       });
     }
 
-    // day switcher for the programme
-    var dayBtns = Array.prototype.slice.call(document.querySelectorAll('.daybar button'));
-    var dayBlocks = Array.prototype.slice.call(document.querySelectorAll('.dayblock'));
-    dayBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var f = btn.getAttribute('data-filter');
-        dayBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
-        dayBlocks.forEach(function (d) {
-          d.hidden = !(f === 'all' || d.getAttribute('data-day') === f);
-        });
-      });
-    });
-
-    // highlight active section in the sticky nav
+    // nav highlight
     var links = Array.prototype.slice.call(document.querySelectorAll('nav.pills a'));
-    var sections = links.map(function (a) { return document.getElementById(a.getAttribute('data-nav')); });
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting) {
-            links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('data-nav') === en.target.id); });
-          }
+          if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('data-nav') === en.target.id); });
         });
       }, { rootMargin: '-45% 0px -50% 0px' });
-      sections.forEach(function (s) { if (s) io.observe(s); });
+      ['plan','plecare','bilete'].forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
     }
   })();
 </script>
